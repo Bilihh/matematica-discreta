@@ -5,9 +5,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
-
-import javax.lang.model.util.ElementScanner14;
-
 import java.util.Set;
 
 /*
@@ -77,7 +74,24 @@ class Entrega {
      * És cert que ∃!x. ∀y. Q(y) -> P(x) ?
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
-      return false; // TO DO
+        
+        for (int y : universe) {
+            boolean xTrobada = false;
+            for (int x : universe) {
+                if (Implicacio(q.test(y), p.test(x)))
+                {
+                    if (!xTrobada)
+                    {
+                        xTrobada = true;
+                    } 
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true; 
     }
 
     /*
