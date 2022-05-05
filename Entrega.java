@@ -5,6 +5,9 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+
+import javax.lang.model.util.ElementScanner14;
+
 import java.util.Set;
 
 /*
@@ -58,8 +61,16 @@ class Entrega {
         BiPredicate<Integer, Integer> p,
         Predicate<Integer> q,
         Predicate<Integer> r) {
+            boolean result = true;
+            for (int x : universe) {
+                for (int y : universe) {
+                    if (!(Implicacio(p.test(x,y), (q.test(x) && r.test(y))))) {
+                        result = false;
+                    }
+                }
+            }
 
-      return false; // TO DO
+      return result;
     }
 
     /*
@@ -366,6 +377,31 @@ class Entrega {
   static void assertThat(boolean b) {
     if (!b)
       throw new AssertionError();
+  }
+
+  static boolean Implicacio(boolean a, boolean b){
+      if(!a)
+      {
+        if(!b)
+        {
+            return true;
+        }
+        else
+        {
+            return true;
+        }
+      }
+      else
+      {
+        if(!b)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+      }
   }
 }
 
