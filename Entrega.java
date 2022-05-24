@@ -387,7 +387,13 @@ class Entrega {
      * Podeu suposar que `a` i `b` són positius.
      */
     static int exercici1(int a, int b) {
-      return -1; // TO DO
+        int tmp;
+        while (b != 0) {
+            tmp = b;
+            b = a % b;
+            a = tmp;
+        }
+        return a; // TO DO
     }
 
     /*
@@ -396,7 +402,16 @@ class Entrega {
      * Podeu suposar que `a`, `b` i `c` són positius.
      */
     static boolean exercici2(int a, int b, int c) {
-      return false; // TO DO
+        boolean solucion;
+        int mcd;
+        mcd= exercici1(a, b);
+        if(mcd==c){
+            solucion=true;
+        }else{
+            solucion= false;
+        }
+       
+      return solucion; // TO DO
     }
 
     /*
@@ -405,6 +420,7 @@ class Entrega {
      * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
      */
     static int exercici3(int a, int n) {
+        
       return -1; // TO DO
     }
 
