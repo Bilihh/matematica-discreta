@@ -404,8 +404,6 @@ class Entrega {
     static boolean exercici2(int a, int b, int c) {
         boolean solucion;
         int mcd;
-      //  b|a== a%b
-    // d==mcd|c== c%d
         mcd= exercici1(a, b);
         if(c%mcd==0){
             solucion=true;
@@ -422,7 +420,11 @@ class Entrega {
      * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
      */
     static int exercici3(int a, int n) {
-        
+        int mcd=exercici1(a, n);
+        if()
+        for (int i = 0; i < ; i++) {
+            
+        }
       return -1; // TO DO
     }
 
