@@ -421,7 +421,7 @@ class Entrega {
      */
     static int exercici3(int a, int n) {
         int mcd=exercici1(a, n);
-        if()
+        if(mcd!=1)return -1;
         for (int i = 0; i < ; i++) {
             
         }
