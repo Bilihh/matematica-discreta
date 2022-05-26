@@ -5,9 +5,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
-
-import javax.management.relation.InvalidRelationServiceException;
-
 import java.util.Set;
 
 /*
@@ -408,7 +405,7 @@ class Entrega {
         boolean solucion;
         int mcd;
         mcd= exercici1(a, b);
-        if(mcd==c){
+        if(c%mcd==0){
             solucion=true;
         }else{
             solucion= false;
@@ -423,11 +420,12 @@ class Entrega {
      * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
      */
     static int exercici3(int a, int n) {
-        int resultado=0,temporal=0;
-        temporal= (a%n);
-        
-         
-      return resultado; // TO DO
+        int mcd=exercici1(a, n);
+        if(mcd!=1)return -1;
+        for (int i = 0; i < ; i++) {
+            
+        }
+      return -1; // TO DO
     }
 
     /*
