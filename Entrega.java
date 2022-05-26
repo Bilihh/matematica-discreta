@@ -421,11 +421,17 @@ class Entrega {
      */
     static int exercici3(int a, int n) {
         int mcd=exercici1(a, n);
-        if(mcd!=1)return -1;
-        for (int i = 0; i < ; i++) {
-            
+        int resultado=0;
+        if(mcd!=1){
+            resultado=-1;
+            return resultado;
         }
-      return -1; // TO DO
+        for (int i = 0; i < n ; i++) {
+            if ((a*i-1)%n==0) {
+                return resultado=i;
+            }
+        }
+        return resultado;
     }
 
     /*
