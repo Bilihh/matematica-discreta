@@ -404,8 +404,10 @@ class Entrega {
     static boolean exercici2(int a, int b, int c) {
         boolean solucion;
         int mcd;
+      //  b|a== a%b
+    // d==mcd|c== c%d
         mcd= exercici1(a, b);
-        if(mcd==c){
+        if(c%mcd==0){
             solucion=true;
         }else{
             solucion= false;
