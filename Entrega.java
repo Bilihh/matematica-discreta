@@ -101,7 +101,40 @@ class Entrega {
      * que cada un d'ells està ordenat de menor a major.
      */
     static boolean exercici3(int[][] universe) {
-      return false; // TO DO
+        boolean resultat = false;
+        
+        ArrayList<ArrayList<Integer>> universList = new ArrayList<ArrayList<Integer>>();
+        for (int[] element : universe) {
+            ArrayList<Integer> tmp = new ArrayList<Integer>();
+            for (int element2 : element) {
+                tmp.add(element2);
+            }
+            universList.add(tmp);
+        }
+        
+        boolean are_all_subsets = true;
+        for (ArrayList<Integer> x : universList) {
+            are_all_subsets = true;
+            for (ArrayList<Integer> y : universList) {
+                boolean is_subset = true;
+                for (Integer num : y) {
+                    if (!x.contains(num)){
+                        is_subset = false;
+                        break;
+                    }
+                }
+
+
+                if (!is_subset){
+                    are_all_subsets = false;
+                    continue;
+                }
+            }
+        }
+
+        resultat = are_all_subsets;
+        resultat = !resultat;
+        return resultat; // TO DO
     }
 
     /*
