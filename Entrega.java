@@ -145,15 +145,11 @@ class Entrega {
 
         /*
          * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
-         * Tests Comentats
          */
         static boolean exercici4(int[] universe, int n) {
-            int yvalglob = 0;
-            boolean yvalglobinicializada = false;
-
+            int count = 0;
             for (int x : universe) {
 
-                int yval = 0;
                 boolean yvalinicializada = false;
 
                 for (int y : universe) {
@@ -161,25 +157,22 @@ class Entrega {
                     if ((x * y) % n == 1 % n) {
 
                         if (!yvalinicializada) {
-                            yval = y;
                             yvalinicializada = true;
-                        } else if (yval != y) {
+                            count++;
+                        } else {
                             return false;
                         }
 
                     }
 
                 }
-
-                if (!yvalglobinicializada && yvalinicializada) {
-                    yvalglob = yval;
-                    yvalglobinicializada = true;
-                } else if (yvalglob != yval) {
-                    return false;
-                }
             }
 
-            return yvalglobinicializada;
+            if (count == universe.length) {
+                return true;
+            } else {
+                return false;
+            }
 
         }
 
@@ -233,15 +226,15 @@ class Entrega {
             // Exercici 4
             // És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
 
-            // assertThat(
-            // !exercici4(
-            // new int[] { 0, 5, 7 },
-            // 13));
+            assertThat(
+                    !exercici4(
+                            new int[] { 0, 5, 7 },
+                            13));
 
-            // assertThat(
-            // exercici4(
-            // new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-            // 11));
+            assertThat(
+                    exercici4(
+                            new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+                            11));
 
         }
     }
@@ -710,9 +703,6 @@ class Entrega {
 
             boolean esConexo = DFS(A, new ArrayList<Integer>(), 0).size() == A.length;
 
-
-
-
             for (int[] i : A) {
                 int count = 0;
                 for (int j : i) {
@@ -821,21 +811,21 @@ class Entrega {
         }
     }
 
-    static ArrayList<Integer> DFS(int[][] matrix, ArrayList<Integer> visited, int node){
+    static ArrayList<Integer> DFS(int[][] matrix, ArrayList<Integer> visited, int node) {
         if (!visited.contains(node)) {
             visited.add(node);
         }
 
         for (int i = 0; i < matrix[node].length; i++) {
             Integer connectionNode = matrix[node][i];
-            if (connectionNode == 1 && !visited.contains(i)){
+            if (connectionNode == 1 && !visited.contains(i)) {
                 visited = DFS(matrix, visited, i);
             }
         }
 
         return visited;
     }
-    
+
 }
 
 // vim: set textwidth=100 shiftwidth=2 expandtab :
