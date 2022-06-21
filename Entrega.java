@@ -5,10 +5,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
-
-import javax.tools.ForwardingFileObject;
-import javax.xml.validation.Validator;
-
 import java.util.Set;
 
 /*
@@ -723,7 +719,45 @@ class Entrega {
          *
          */
         static int exercici3(int n, int d) {
-            return -1; // TO DO
+            ArrayList<int[]> relacio = new ArrayList<int[]>();
+            relacio = addChildren(relacio, 0, d);
+
+            while (getLeafCount(relacio) != n) {
+                relacio = addChildren(relacio, getMax(relacio) - (d - 1), d);
+            }
+            return getMax(relacio) + 1;
+        }
+
+        private static int getLeafCount(ArrayList<int[]> relacio) {
+            int count = 0;
+            for (int[] i : relacio) {
+                boolean maximal = true;
+                for (int[] j : relacio) {
+                    if (i[1] == j[0]) {
+                        maximal = false;
+                    }
+                }
+
+                if (maximal){
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        private static ArrayList<int[]> addChildren(ArrayList<int[]> relacio, int node, int quantitat) {
+            for (int i = 0; i < quantitat; i++) {
+                relacio.add(new int[] {node, getMax(relacio) + 1});
+            }
+            return relacio;
+        }
+
+        private static int getMax(ArrayList<int[]> relacio) {
+            int result = 0;
+            for (int[] i : relacio) {
+                result = Math.max(result, i[1]);
+            }
+            return result;
         }
 
         /*
