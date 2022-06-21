@@ -233,15 +233,15 @@ class Entrega {
             // Exercici 4
             // És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
 
-            //assertThat(
-            //        !exercici4(
-            //                new int[] { 0, 5, 7 },
-            //                13));
+            // assertThat(
+            // !exercici4(
+            // new int[] { 0, 5, 7 },
+            // 13));
 
-            //assertThat(
-            //        exercici4(
-            //                new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
-            //                11));
+            // assertThat(
+            // exercici4(
+            // new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
+            // 11));
 
         }
     }
@@ -375,7 +375,6 @@ class Entrega {
                 }
             }
 
-
             // Check minim
             ArrayList<Integer> minimals = new ArrayList<Integer>();
             for (int i = 0; i < rel.length; i++) {
@@ -385,21 +384,21 @@ class Entrega {
                 for (int j = 0; j < rel.length; j++) {
                     int posiciob = rel[j][1];
 
-                    if (posicioa == posiciob && i != j){
+                    if (posicioa == posiciob && i != j) {
                         minimal = false;
                         break;
                     }
                 }
 
                 if (minimal) {
-                    if (!minimals.contains(posicioa)){
+                    if (!minimals.contains(posicioa)) {
                         minimals.add(posicioa);
                     }
                 }
 
             }
 
-            if (minimals.size() != 1 || minimals.get(0) != x){
+            if (minimals.size() != 1 || minimals.get(0) != x) {
                 return false;
             }
 
@@ -417,7 +416,7 @@ class Entrega {
         static int[] exercici3(int[] dom, int[] codom, Function<Integer, Integer> f, int y) {
             ArrayList<Integer> antiimagenes = new ArrayList<Integer>();
             for (int i : dom) {
-                if (f.apply(i) == y ){
+                if (f.apply(i) == y) {
                     antiimagenes.add(i);
                 }
             }
@@ -693,14 +692,14 @@ class Entrega {
 
             for (int[] i : A) {
                 for (int j : i) {
-                    if (j == 1){
+                    if (j == 1) {
                         mida++;
                     }
                 }
             }
-            mida = mida/2;
+            mida = mida / 2;
 
-            return new int[] {ordre, mida}; // TO DO
+            return new int[] { ordre, mida }; // TO DO
         }
 
         /*
@@ -708,7 +707,23 @@ class Entrega {
          * eulerià.
          */
         static boolean exercici2(int[][] A) {
-            return false; // TO DO
+
+            boolean esConexo = DFS(A, new ArrayList<Integer>(), 0).size() == A.length;
+
+
+
+
+            for (int[] i : A) {
+                int count = 0;
+                for (int j : i) {
+                    count += j;
+                }
+                if (!(esConexo && count % 2 == 0)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /*
@@ -805,6 +820,22 @@ class Entrega {
             }
         }
     }
+
+    static ArrayList<Integer> DFS(int[][] matrix, ArrayList<Integer> visited, int node){
+        if (!visited.contains(node)) {
+            visited.add(node);
+        }
+
+        for (int i = 0; i < matrix[node].length; i++) {
+            Integer connectionNode = matrix[node][i];
+            if (connectionNode == 1 && !visited.contains(i)){
+                visited = DFS(matrix, visited, i);
+            }
+        }
+
+        return visited;
+    }
+    
 }
 
 // vim: set textwidth=100 shiftwidth=2 expandtab :
