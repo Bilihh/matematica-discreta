@@ -687,7 +687,20 @@ class Entrega {
          * la mida del graf.
          */
         static int[] exercici1(int[][] A) {
-            return new int[] {}; // TO DO
+
+            int ordre = A.length;
+            int mida = 0;
+
+            for (int[] i : A) {
+                for (int j : i) {
+                    if (j == 1){
+                        mida++;
+                    }
+                }
+            }
+            mida = mida/2;
+
+            return new int[] {ordre, mida}; // TO DO
         }
 
         /*
