@@ -230,7 +230,7 @@ class Entrega {
 
             // Exercici 4
             // És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
-            
+
             assertThat(
                     !exercici4(
                             new int[] { 0, 5, 7 },
@@ -274,7 +274,7 @@ class Entrega {
          * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
          */
         static boolean exercici1(int[] a, int[][] p) {
-            
+
             ArrayList<Integer> pjunt = new ArrayList<Integer>();
             for (int[] x : p) {
                 for (int y : x) {
@@ -285,7 +285,7 @@ class Entrega {
             Object[] tmp = pjunt.toArray();
             int[] pjuntarr = new int[tmp.length];
             for (int i = 0; i < tmp.length; i++) {
-                pjuntarr[i] = (int)tmp[i];
+                pjuntarr[i] = (int) tmp[i];
             }
 
             Arrays.sort(pjuntarr);
@@ -300,7 +300,108 @@ class Entrega {
          * Podeu soposar que `x` pertany a `a` i que `a` està ordenat de menor a major.
          */
         static boolean exercici2(int[] a, int[][] rel, int x) {
-            return false; // TO DO
+
+            // Check Reflexividad
+            for (int i = 0; i < a.length; i++) {
+                boolean trobat = false;
+                for (int j = 0; j < rel.length; j++) {
+                    if (rel[j][0] == a[i] && rel[j][1] == a[i]) {
+                        trobat = true;
+                        break;
+                    }
+                }
+                if (!trobat) {
+                    return false;
+                }
+            }
+
+            // Check transitividad
+            ArrayList<Boolean> transitivos = new ArrayList<>();
+            for (int i = 0; i < rel.length; i++) {
+
+                int posicioa = rel[i][0];
+                int posiciob = rel[i][1];
+
+                for (int j = 0; j < rel.length; j++) {
+                    int posicioc = rel[j][0];
+                    int posiciod = rel[j][1];
+
+                    if (posiciob == posicioc) {
+                        transitivos.add(false);
+                        for (int k = 0; k < rel.length; k++) {
+                            int posicioe = rel[k][0];
+                            int posiciof = rel[k][1];
+
+                            if (posicioa == posicioe && posiciod == posiciof) {
+                                transitivos.set(transitivos.size() - 1, true);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (Boolean trans : transitivos) {
+                if (!trans) {
+                    return false;
+                }
+            }
+
+            // Check Antisimetria
+            ArrayList<Boolean> antisimetricos = new ArrayList<>();
+            for (int i = 0; i < rel.length; i++) {
+
+                int posicioa = rel[i][0];
+                int posiciob = rel[i][1];
+
+                for (int j = 0; j < rel.length; j++) {
+                    int posicioc = rel[j][0];
+                    int posiciod = rel[j][1];
+
+                    if (posiciob == posicioc && posicioa == posiciod) {
+                        antisimetricos.add(false);
+                        if (posicioa == posiciob) {
+                            antisimetricos.set(antisimetricos.size() - 1, true);
+                        }
+                    }
+                }
+            }
+
+            for (Boolean antis : antisimetricos) {
+                if (!antis) {
+                    return false;
+                }
+            }
+
+
+            // Check minim
+            ArrayList<Integer> minimals = new ArrayList<Integer>();
+            for (int i = 0; i < rel.length; i++) {
+                int posicioa = rel[i][0];
+
+                boolean minimal = true;
+                for (int j = 0; j < rel.length; j++) {
+                    int posiciob = rel[j][1];
+
+                    if (posicioa == posiciob && i != j){
+                        minimal = false;
+                        break;
+                    }
+                }
+
+                if (minimal) {
+                    if (!minimals.contains(posicioa)){
+                        minimals.add(posicioa);
+                    }
+                }
+
+            }
+
+            if (minimals.size() != 1 || minimals.get(0) != x){
+                return false;
+            }
+
+            return true;
         }
 
         /*
@@ -606,7 +707,7 @@ class Entrega {
      * sigui `true`.
      */
     public static void main(String[] args) {
-        //Tema1.tests();
+        // Tema1.tests();
         Tema2.tests();
         Tema3.tests();
         Tema4.tests();
