@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 
+import javax.tools.ForwardingFileObject;
 import javax.xml.validation.Validator;
 
 import java.util.Set;
@@ -413,7 +414,22 @@ class Entrega {
          * de menor a major.
          */
         static int[] exercici3(int[] dom, int[] codom, Function<Integer, Integer> f, int y) {
-            return new int[] {}; // TO DO
+            ArrayList<Integer> antiimagenes = new ArrayList<Integer>();
+            for (int i : dom) {
+                if (f.apply(i) == y ){
+                    antiimagenes.add(i);
+                }
+            }
+
+            Object[] tmp = antiimagenes.toArray();
+            int[] pjuntarr = new int[tmp.length];
+            for (int i = 0; i < tmp.length; i++) {
+                pjuntarr[i] = (int) tmp[i];
+            }
+
+            Arrays.sort(pjuntarr);
+
+            return pjuntarr;
         }
 
         /*
