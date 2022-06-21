@@ -701,7 +701,7 @@ class Entrega {
          */
         static boolean exercici2(int[][] A) {
 
-            boolean esConexo = DFS(A, new ArrayList<Integer>(), 0).size() == A.length;
+            boolean esConexo = DFS_Ex2(A, new ArrayList<Integer>(), 0).size() == A.length;
 
             for (int[] i : A) {
                 int count = 0;
@@ -731,7 +731,11 @@ class Entrega {
          * graf conté algún cicle.
          */
         static boolean exercici4(int[][] A) {
-            return false; // TO DO
+            if (DFS_Ex4(A, new ArrayList<Integer>(), 0, 0) == null){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         /*
@@ -811,7 +815,7 @@ class Entrega {
         }
     }
 
-    static ArrayList<Integer> DFS(int[][] matrix, ArrayList<Integer> visited, int node) {
+    static ArrayList<Integer> DFS_Ex2(int[][] matrix, ArrayList<Integer> visited, int node) {
         if (!visited.contains(node)) {
             visited.add(node);
         }
@@ -819,7 +823,31 @@ class Entrega {
         for (int i = 0; i < matrix[node].length; i++) {
             Integer connectionNode = matrix[node][i];
             if (connectionNode == 1 && !visited.contains(i)) {
-                visited = DFS(matrix, visited, i);
+                visited = DFS_Ex2(matrix, visited, i);
+            }
+        }
+
+        return visited;
+    }
+
+
+    static ArrayList<Integer> DFS_Ex4(int[][] matrix, ArrayList<Integer> visited, int node, int parent) {
+        if (!visited.contains(node)) {
+            visited.add(node);
+        }
+
+        for (int i = 0; i < matrix[node].length; i++) {
+            Integer connectionNode = matrix[node][i];
+            
+            if (connectionNode == 1 && visited.contains(i) && i != parent) {
+                return null;
+            }
+
+            if (connectionNode == 1 && !visited.contains(i)) {
+                visited = DFS_Ex4(matrix, visited, i, node);
+                if (visited == null){
+                    return null;
+                }
             }
         }
 
