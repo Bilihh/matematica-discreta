@@ -449,7 +449,49 @@ class Entrega {
         static final int BIJECTIVE = INJECTIVE + SURJECTIVE;
 
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
-            return -1; // TO DO
+            boolean inyectiva = true;
+            boolean subyectiva = false;
+
+            ArrayList<Integer> AntiImgs = new ArrayList<Integer>();
+            ArrayList<Integer> aux = new ArrayList<Integer>();
+            ArrayList<Integer> Imgs = new ArrayList<Integer>();
+
+            for (int i : dom) {
+                AntiImgs.add(i);
+                aux.add(i);
+            }
+
+            for (int i : codom) {
+                Imgs.add(i);
+            }
+
+            ArrayList<Integer> TrobatAntiImgs = new ArrayList<Integer>();
+            ArrayList<Integer> TrobatImgs = new ArrayList<Integer>();
+
+            for (int i : aux) {
+                TrobatAntiImgs.add(i);
+                AntiImgs.remove((Object) i);
+
+                if (TrobatImgs.contains(f.apply(i))) {
+                    inyectiva = false;
+                }
+                TrobatImgs.add(f.apply(i));
+                Imgs.remove((Object) f.apply(i));
+
+            }
+
+            subyectiva = AntiImgs.size() == 0 && Imgs.size() == 0;
+
+            if (inyectiva && subyectiva) {
+                return BIJECTIVE;
+            }
+            if (inyectiva) {
+                return INJECTIVE;
+            }
+            if (subyectiva) {
+                return SURJECTIVE;
+            }
+            return NOTHING_SPECIAL;
         }
 
         /*
@@ -723,7 +765,7 @@ class Entrega {
      * sigui `true`.
      */
     public static void main(String[] args) {
-        // Tema1.tests();
+        Tema1.tests();
         Tema2.tests();
         Tema3.tests();
         Tema4.tests();
